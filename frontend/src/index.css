@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syne:wght@400;600;700;800&display=swap');
+
+:root {
+  --bg-primary: #060910;
+  --bg-secondary: #0d1117;
+  --bg-card: #0d1520;
+  --border: #1a2a3a;
+  --accent-green: #00ff9d;
+  --accent-cyan: #00d4ff;
+  --accent-orange: #ff6b35;
+  --text-primary: #e0eaf5;
+  --text-muted: #4a6a8a;
+  --font-mono: 'Share Tech Mono', monospace;
+  --font-sans: 'Syne', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse at 20% 20%, rgba(0,255,157,0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(0,212,255,0.04) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
