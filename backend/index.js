@@ -8,6 +8,14 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get('/status', (req, res) => {
+  res.json({ 
+    status: "Online", 
+    version: "1.1", 
+    message: "Deployed via Jenkins automation!" 
+  });
+
+});
 app.use(async (req, res, next) => {
   const start = Date.now();
   res.on('finish', async () => {
