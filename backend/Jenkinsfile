@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+
+    environment {
+        // Links to your Jenkins NodeJS plugin
+        NODE_JS_PATH = tool name: 'NodeJS', type: 'jenkins.plugins.nodejs.tools.NodeJSInstallation'
+        PATH = "${NODE_JS_PATH}/bin:${env.PATH}"
+    }
+
+    stages {
+        stage('Install Dependencies') {
+            steps {
+                // We go into the workspace's backend folder
+                dir('backend') {
+                    sh 'npm install'
+                }
+            }
+        }
+
+        stage('Sync to Production') {
+            steps {
+                // Sync from Jenkins workspace back to the /opt folder
+                sh 'rsync -av --exclude=".env" --exclude="node_modules" --exclude=".git" backend/ /opt/devpulse/backend/'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                dir('/opt/devpulse/backend') {
+                    // Restart the PM2 process
+                    sh 'pm2 restart devpulse-backend || pm2 start index.js --name devpulse-backend'
+                    sh 'pm2 save'
+                }
+            }
+        }
+    }
+}
