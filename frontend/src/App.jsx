@@ -4,7 +4,7 @@ import EndpointChart from './components/EndpointChart';
 import RequestFeed from './components/RequestFeed';
 import './index.css';
 
-const API = '/api';
+const API = 'https://devpulse-api.duckdns.org/api';
 function PulseDot() {
   return (
     <span style={{ position: 'relative', display: 'inline-block', width: '10px', height: '10px', marginRight: '8px' }}>
